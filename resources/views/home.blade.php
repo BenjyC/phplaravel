@@ -8,7 +8,10 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    
+                    @for($i=0; $i < sizeof($datas); $i++)
+                        <p>{{$datas[$i]}}</p>
+                        <hr>
+                    @endfor
                 </div>
             </div>
         </div>

@@ -8,8 +8,6 @@ use App\Http\Requests;
 use GuzzleHttp\Client as GuzzleClient;
 use Illuminate\Http\Request;
 
-use Goutte\Client;
-
 class HomeController extends Controller
 {
     /**
@@ -36,9 +34,15 @@ class HomeController extends Controller
       $guzzleClient = new GuzzleClient(array(
           'timeout' => 60,
       ));
-      $crawler->filter('.result__title .result__a')->each(function ($node) {
-        dump($node->text());
+      $goutteClient->setClient($guzzleClient);
+      global $scrape;
+      $scrape = array();
+
+      $crawler->filter('div .col-xs-12 > h4 > a')->each(function ($node, $scrape) {
+          global $scrape;
+          $text = $node->text();
+          array_push($scrape, $text);
         });
-        return view('home');
+        return view('home')->withDatas($scrape);
     }
 }
