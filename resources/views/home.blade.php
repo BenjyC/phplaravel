@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     @for($i=0; $i < sizeof($datas); $i++)
                         <p>{{$datas[$i]}}</p>
+                        <a href="{{ route('wishlist', $i) }}" class="btn btn-primary"> Add to Wishlist </a>
                         <hr>
                     @endfor
                 </div>
